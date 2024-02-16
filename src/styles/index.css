@@ -12,3 +12,12 @@
 .debug{
   border:1px solid red;
 }
+button{
+  border: none;
+  outline: none;
+  scale: 1;
+  transition: .2s;
+}
+button:active{
+  scale: .9;
+}
