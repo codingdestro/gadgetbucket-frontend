@@ -1,11 +1,11 @@
-import "../styles/field_card.css";
-import TextField from "./InputFields/TextField";
-import NumberField from "./InputFields/NumberField";
-import ConfirmPasswords from "./InputFields/ConfrimPasswords";
-import PasswordField from "./InputFields/PasswordField";
+import "../../styles/field_card.scss";
+import TextField from "./TextField";
+import NumberField from "./NumberField";
+import ConfirmPasswords from "./ConfrimPasswords";
+import PasswordField from "./PasswordField";
 
 export type fieldsType = {
-  type: "text"|"number"|"password"|"confirmPassword";
+  type: "text" | "number" | "password" | "confirmPassword";
   value: string;
   name: string;
 };

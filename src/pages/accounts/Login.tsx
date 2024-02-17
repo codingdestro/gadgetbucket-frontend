@@ -1,6 +1,7 @@
 import { useState } from "react";
-import InputFieldCard, { fieldsType } from "../../components/InputFieldCard";
-
+import InputFieldCard, {
+  fieldsType,
+} from "../../components/InputFields/InputFieldCard";
 const Home = () => {
   const [fields, setFields] = useState<fieldsType[]>([
     {
@@ -26,9 +27,9 @@ const Home = () => {
   };
   return (
     <>
-        <div className="field-card ">
-          <InputFieldCard field={fields} onChangeValue={changeValue} />
-        </div>
+      <div className="field-card ">
+        <InputFieldCard field={fields} onChangeValue={changeValue} />
+      </div>
     </>
   );
 };

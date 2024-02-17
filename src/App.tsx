@@ -1,5 +1,10 @@
+import { Error } from "./components/messageTags";
 function App() {
-  return <div>this home page bro</div>;
+  return (
+    <>
+      <Error message="there is an error" />
+    </>
+  );
 }
 
 export default App;
