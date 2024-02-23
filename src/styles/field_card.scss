@@ -7,9 +7,9 @@
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.18);
   backdrop-filter: blur(30px);
-  box-shadow: 2px 5px 5px rgba(255, 255, 255, 0.253);
+  box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.5);
 
   .button {
     padding: 0.8rem 2rem;
@@ -54,13 +54,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: fadeIn .4s forwards ease-in;
   flex-direction: column;
   width: 100%;
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
-  background: linear-gradient(45deg, red, blue);
+  // background: linear-gradient(45deg, red, blue);
   .login-toggle {
     position: relative;
     top: 2%;
@@ -69,6 +70,21 @@
     padding: 1rem;
     cursor: pointer;
     user-select: none;
+  }
+  header {
+    font-size: 34px;
+    font-weight: 600;
+    text-transform: capitalize;
+    position: absolute;
+    top: 10%;
+  }
+  .toggle-link {
+    margin-top: 1rem;
+    text-decoration: underline;
+    color: blue;
+    padding: 0.5rem;
+    font-style: italic;
+    cursor: pointer;
   }
 }
 .confirm-password-box {
@@ -105,13 +121,22 @@
     background-repeat: no-repeat;
     background-position: center;
     background-image: url("/eye.png");
-    width: 34px;
-    height: 34px;
+    width: 24px;
+    height: 24px;
     padding: 0.2rem;
     border-radius: 0.5rem;
     transition: 0.1s;
     &.hide {
       background-image: url("/eye_close.png");
     }
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
   }
 }
