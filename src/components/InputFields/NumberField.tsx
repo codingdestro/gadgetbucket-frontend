@@ -8,7 +8,11 @@ const NumberField = ({ value, changeValue }: Props) => {
       <input
         type="number"
         value={value}
-        onChange={(e) => changeValue(e.target.value)}
+        maxLength={10}
+        placeholder="00 00 00 00 00"
+        onChange={(e) =>
+          e.target.value.length <= 10 && changeValue(e.target.value)
+        }
       />
     </>
   );

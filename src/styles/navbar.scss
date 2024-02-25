@@ -5,6 +5,7 @@ section {
     gap: 1rem;
     background-color: aqua;
     padding: 0.5rem;
+    position: relative;
     .box {
         display: flex;
         align-items: flex-end;
@@ -23,6 +24,13 @@ section {
             width: 18px;
             height: 18px;
         }
+    }
+    .login-button {
+        padding: 0.5rem 1rem;
+        border-radius: 0.8rem;
+        background-color: rgb(38, 179, 235);
+        position: absolute;
+        right: 1rem;
     }
 }
 a {
