@@ -1,9 +1,15 @@
 import { authenticateToken } from "../../services/authenticate";
-const loader = () => {
-  const token = localStorage.getItem("token") || "";
-  authenticateToken(token).then((res: any) => {
-    console.log(res);
-  });
-  return token ? true : false;
+const loader = async () => {
+  let token = localStorage.getItem("token") || "";
+  if (token) {
+    try {
+      const res = await authenticateToken(token);
+      return res.token  ? true : false;
+    } catch {
+      return false;
+    }
+  } else {
+    return false;
+  }
 };
 export default loader;

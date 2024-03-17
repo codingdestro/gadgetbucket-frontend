@@ -27,7 +27,7 @@
   border-radius: 0.8rem;
   padding: 0.5rem;
   background-color: white;
-  width: 380px;
+  width: 340px;
   position: relative;
   .field-name {
     position: absolute;
@@ -50,11 +50,18 @@
   }
 }
 
+.login-button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background: rgba(0, 153, 255, 0.733);
+  font-size: 18px;
+}
+
 .field-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: fadeIn .4s forwards ease-in;
+  animation: fadeIn 0.4s forwards ease-in;
   flex-direction: column;
   width: 100%;
   position: absolute;

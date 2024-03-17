@@ -7,7 +7,7 @@ const fetcher: AxiosInstance = axios.create({
 export const authenticateToken = async (token: string) => {
   try {
     if (token === "") return false;
-    const res = await fetcher.post("/account/authenticate", {
+    const res = await fetcher.post("account/authenticate", {
       token,
     });
     if (res.status === 200) return res.data;

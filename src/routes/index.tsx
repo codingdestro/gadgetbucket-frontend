@@ -9,20 +9,24 @@ import "../styles/index.scss";
 import Navbar from "../components/header/Navbar";
 import PrivateRoute from "./PrivateRoute";
 import TokenLoader from "./loaders/tokenLoader";
+import Home from "../pages/home";
+import Signin from "../pages/accounts/Signin"
+import Login from "../pages/accounts/Login"
 
 const route = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route path="/" loader={TokenLoader} element={<PrivateRoute />}>
+      {/* <Route loader={TokenLoader} element={<PrivateRoute />}> */}
         <Route element={<Navbar />}>
-          <Route path="home" element={<div>welcome to home</div>} />
+          <Route path="" element={<Home />} />
           <Route path="" element={<div>welcome to home</div>} />
           <Route path="cart" element={<div>welcome to cart</div>} />
           <Route path="order" element={<div>welcome to order</div>} />
         </Route>
-      </Route>
-      <Route path="/account">
-        <Route path="signin" element={<Account />} />
+      {/* </Route> */}
+      <Route path="/account" loader={TokenLoader} element={<Account />}>
+        <Route path="signin" Component={Signin}  />
+        <Route path="login" Component={Login}  />
       </Route>
       <Route
         path="*"
