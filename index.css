@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+input::placeholder {
+  @apply text-sm;
+}
+
+.click{
+  transition: .1s;
+}
+.click:active{
+  scale: .98;
+}

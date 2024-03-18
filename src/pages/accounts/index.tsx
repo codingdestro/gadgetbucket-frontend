@@ -6,7 +6,7 @@ const index = () => {
   return isAuthenticated ? (
     <Navigate to={"/"} />
   ) : (
-    <div className="field-container">
+    <div className="w-full h-svh flex items-center justify-center">
       <Outlet />
     </div>
   );

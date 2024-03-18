@@ -44,7 +44,7 @@ const Navbar = () => {
               );
             }
           )}
-          <div className="login-button">
+          <div className="border px-5 py-1 bg-sky-500 rounded-lg">
             <Link
               to={"account/signin"}
               onClick={() => localStorage.setItem("token", "")}
