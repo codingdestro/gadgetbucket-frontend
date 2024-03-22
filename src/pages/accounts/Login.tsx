@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Login } from "../../api/signin";
 
 export interface FieldsType {
   name: string;
@@ -9,6 +10,11 @@ export interface FieldsType {
 const Home = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const redirect = useNavigate();
+
+  const loginUser = async () => {
+    if (await Login({ password, email })) redirect("/");
+  };
   return (
     <>
       <section className="border w-[350px] h-[600px] gap-10 p-5  flex flex-col items-center justify-between shadow-md rounded-3xl relative ">
@@ -44,7 +50,10 @@ const Home = () => {
         </div>
 
         <div className="w-full">
-          <button className="w-full click py-2 border flex justify-center items-center rounded-3xl bg-gradient-to-r to-sky-400 from-pink-400 text-white capitalize">
+          <button
+            onClick={loginUser}
+            className="w-full click py-2 border flex justify-center items-center rounded-3xl bg-gradient-to-r to-sky-400 from-pink-400 text-white capitalize"
+          >
             login
           </button>
           <div className="text-center mt-2 bottom-5">

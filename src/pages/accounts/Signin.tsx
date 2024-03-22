@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Signin } from "../../api/signin";
 import { FieldsType } from "./Login";
 
 const Home = () => {
@@ -34,6 +35,17 @@ const Home = () => {
 
       return data;
     });
+  };
+
+  const signinUser = async () => {
+    const user = {
+      name: fields[0].value,
+      email: fields[1].value,
+      password: password[0],
+    };
+    // setUser(user);
+    await Signin(user);
+    navigate("/");
   };
 
   return (
@@ -88,7 +100,10 @@ const Home = () => {
         </div>
 
         <div className="w-full">
-          <button className="w-full click py-2 border flex justify-center items-center rounded-3xl bg-gradient-to-r to-sky-400 from-pink-400 text-white capitalize">
+          <button
+            onClick={() => signinUser()}
+            className="w-full click py-2 border flex justify-center items-center rounded-3xl bg-gradient-to-r to-sky-400 from-pink-400 text-white capitalize"
+          >
             signin
           </button>
           <div className=" text-center mt-2 bottom-5">
