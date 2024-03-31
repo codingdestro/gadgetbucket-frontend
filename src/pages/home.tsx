@@ -1,28 +1,36 @@
-import axios from "axios";
-import { addToCartProduct, useFetchItems } from "../api/products";
 import { ProductType } from "../types/productType";
 import Loading from "../components/status/Loading";
+
+import useProducts from "../store/useProducts";
+import { useEffect } from "react";
 const home = () => {
   // const [loading, _, products] = useProducts();
-  const { isLoading, error, items } = useFetchItems<ProductType>(async () => {
-    const { data } = await axios.get(
-      "/products/get/products?offset=0&limit=100"
-    );
-    return data;
-  });
+  const products = useProducts((state) => state.products);
+  const isLoading = useProducts((state) => state.isLoading);
+  const isAddedToCart = useProducts((state) => state.isAddedToCart);
+  const error = useProducts((state) => state.error);
+
+  const fetchProducts = useProducts((state) => state.fetch);
+  const addToCartProduct = useProducts((state) => state.addToCartProduct);
 
   const addToCartHandler = async (id: string) => {
-    id && (await addToCartProduct(id));
+    addToCartProduct(id);
   };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   return isLoading ? (
     <Loading />
   ) : error ? (
-    <div>{error}</div>
+    <>
+      <div>{error}</div>
+    </>
   ) : (
     <section className="h-[88%] w-full px-5  fixed overflow-auto scroll-none">
       <div className="grid sm:grid-cols-2 xl:grid-cols-4 md:grid-cols-3  gap-5 animate-fade">
-        {items.map((product: ProductType, idx: number) => (
+        {products.map((product: ProductType, idx: number) => (
           <div
             key={idx}
             className="border p-5 flex flex-col gap-3 shadow-md rounded-md justify-center items-center"
@@ -44,12 +52,15 @@ const home = () => {
               <button className="bg-accent text-white rounded-lg  px-5 py-2">
                 order now
               </button>
-              <button
-                onClick={() => addToCartHandler(product.id)}
-                className="bg-orange-500 rounded-lg py-2 px-5"
-              >
-                add to cart
-              </button>
+              <div className="bg-orange-500  rounded-lg py-2 px-5">
+                {isAddedToCart !== product.id ? (
+                  <button onClick={() => addToCartHandler(product.id)}>
+                    add to cart
+                  </button>
+                ) : (
+                  <div>loading...</div>
+                )}
+              </div>
             </div>
           </div>
         ))}
