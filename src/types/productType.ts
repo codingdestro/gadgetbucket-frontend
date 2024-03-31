@@ -1,9 +1,9 @@
-interface ProductType {
-  id: number;
-  name: string;
+export interface ProductType {
+  id: string;
+  title: string;
+  img: string;
   price: number;
-  quantity: number;
+  textPrice: string;
   category: string;
-  sub_category: string;
+  subCategory: string;
 }
-export default ProductType;

@@ -17,7 +17,7 @@ const paths = [
 ];
 const Navbar = () => {
   const location = useLocation();
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   return (
     <>
       <section
@@ -26,10 +26,18 @@ const Navbar = () => {
       >
         <div className="flex justify-between items-center ssm:block">
           <div className="text-2xl font-semibold tracking-wider italic">
+            <Link to={"/"}>
             <h2>GadgetWorld</h2>
+            </Link>
           </div>
-          <div className="ssm:hidden">
-            <span onClick={() => setShow((prev: boolean) => !prev)}>show</span>
+          <div className="ssm:hidden cursor-pointer">
+            <span onClick={() => setShow((prev: boolean) => !prev)}>
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/12596/12596938.png"
+                width={32}
+                alt=""
+              />
+            </span>
           </div>
         </div>
         <div
@@ -69,7 +77,7 @@ const Navbar = () => {
           </div>
         </div>
       </section>
-      <section className="px-3 ">
+      <section className=" ">
         <Outlet />
       </section>
     </>

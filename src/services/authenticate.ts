@@ -10,7 +10,6 @@ export const authenticateToken = async (token: string) => {
     const res = await fetcher.post("account/authenticate", {
       token,
     });
-    console.log(res)
     if (res.status === 200) return res.data;
   } catch (error) {
     throw error;

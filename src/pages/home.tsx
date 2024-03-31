@@ -1,22 +1,37 @@
-import { useProducts, ProductType } from "../api/products";
+import axios from "axios";
+import { addToCartProduct, useFetchItems } from "../api/products";
+import { ProductType } from "../types/productType";
+import Loading from "../components/status/Loading";
 const home = () => {
-  const [loading, _, products] = useProducts();
+  // const [loading, _, products] = useProducts();
+  const { isLoading, error, items } = useFetchItems<ProductType>(async () => {
+    const { data } = await axios.get(
+      "/products/get/products?offset=0&limit=100"
+    );
+    return data;
+  });
 
-  return loading ? (
-    <div>loading</div>
+  const addToCartHandler = async (id: string) => {
+    id && (await addToCartProduct(id));
+  };
+
+  return isLoading ? (
+    <Loading />
+  ) : error ? (
+    <div>{error}</div>
   ) : (
-    <div className="grid sm:grid-cols-2 xl:grid-cols-4 md:grid-cols-3  gap-5 animate-fade">
-      {Array.isArray(products) &&
-        products.map((product: ProductType, idx: number) => (
+    <section className="h-[88%] w-full px-5  fixed overflow-auto scroll-none">
+      <div className="grid sm:grid-cols-2 xl:grid-cols-4 md:grid-cols-3  gap-5 animate-fade">
+        {items.map((product: ProductType, idx: number) => (
           <div
             key={idx}
-            className=" border p-5 flex flex-col gap-3 shadow-md rounded-md justify-center items-center"
+            className="border p-5 flex flex-col gap-3 shadow-md rounded-md justify-center items-center"
           >
-            <div className="w-[18rem] h-[15rem] p-5 flex items-center justify-center">
+            <div className="w-[12rem] h-[12rem] p-5 flex items-center justify-center">
               <img src={product.img} alt="this is what is this" />
             </div>
-            <div>
-              <div className="line-clamp-2">
+            <div className="">
+              <div className=" line-clamp-2">
                 <h2>{product.title}</h2>
               </div>
               <div className="mt-1 flex gap-[5px]">
@@ -29,13 +44,17 @@ const home = () => {
               <button className="bg-accent text-white rounded-lg  px-5 py-2">
                 order now
               </button>
-              <button className="bg-orange-500 rounded-lg py-2 px-5">
+              <button
+                onClick={() => addToCartHandler(product.id)}
+                className="bg-orange-500 rounded-lg py-2 px-5"
+              >
                 add to cart
               </button>
             </div>
           </div>
         ))}
-    </div>
+      </div>
+    </section>
   );
 };
 

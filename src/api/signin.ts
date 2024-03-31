@@ -1,12 +1,8 @@
 import axios from "axios";
 
-export type userSigninData = {
-  name: string;
-  email: string;
-  password: string;
-};
+import { userSigninData } from "../types/userTypes";
 
-axios.defaults.baseURL = "http://localhost:5555/";
+// axios.defaults.baseURL = "http://localhost:5555/";
 
 export const Signin = async (user: userSigninData) => {
   try {
@@ -14,11 +10,9 @@ export const Signin = async (user: userSigninData) => {
     if (res.data.token) {
       localStorage.setItem("token", res.data.token);
       return true;
-    } else {
-      throw "faild login";
     }
+    return false;
   } catch (error) {
-    console.log("error to signin user!");
     return false;
   }
 };
@@ -28,11 +22,9 @@ export const Login = async (user: { password: string; email: string }) => {
     if (res.data.token) {
       localStorage.setItem("token", res.data.token);
       return true;
-    } else {
-      throw "faild login";
     }
+    return false;
   } catch (error) {
-    console.log("error to login user!");
     return false;
   }
 };

@@ -1,46 +1,41 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-
 axios.defaults.baseURL = "http://localhost:5555";
 
-export interface ProductType {
-  id: string;
-  title: string;
-  img: string;
-  price: number;
-  textPrice: string;
-  category: string;
-  subCategory: string;
-}
+// axios.defaults.baseURL = "http://192.168.1.72:5555";
 
-export const getAllProducts = async () => {
+export const addToCartProduct = async (id: string) => {
   try {
-    const res = await axios.get("/products/get/products?offset=0&limit=100");
-    if (res.data.msg) return res.data;
-    else throw res.data.err;
+    const token = localStorage.getItem("token");
+    const { data } = await axios.post("/carts/add", { productId: id, token });
+    if (data.msg) alert(data.msg);
+    else alert(data.err);
   } catch (error) {
     console.log(error);
   }
 };
 
-export const useProducts = () => {
-  const [loading, setLoading] = useState(false);
-  const [error, _] = useState("");
-  const [data, setData] = useState<ProductType[]>([]);
-  useEffect(() => {
-    async function fetchProducts() {
-      try {
-        setLoading(true);
-        const res: { msg: string; products: ProductType[] } =
-          await getAllProducts();
-        setLoading(false);
-        setData(res.products);
-      } catch (error) {
-        console.log(error);
+export const useFetchItems = <T>(cb: Function) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<any>();
+  const [items, setData] = useState<T[]>([]);
+  async function fetchItems() {
+    try {
+      setIsLoading(true);
+      const data = await cb();
+      setIsLoading(false);
+      if (Array.isArray(data)) {
+        setData(data);
+      } else {
+        throw "data is not an array type";
       }
+    } catch (error) {
+      console.log(error);
+      setError(error);
     }
-
-    fetchProducts();
+  }
+  useEffect(() => {
+    fetchItems();
   }, []);
-  return [loading, error, data];
+  return { isLoading, error, items, fetchItems };
 };
