@@ -1,67 +1,42 @@
 import { ProductType } from "../types/productType";
 import Loading from "../components/status/Loading";
+import Error from "../components/status/Error";
 
 import useProducts from "../store/useProducts";
-import { useEffect } from "react";
+import ProductCard from "../components/products/ProductCard";
+import SortButton from "../components/products/SortButton";
 const home = () => {
   // const [loading, _, products] = useProducts();
-  const products = useProducts((state) => state.products);
+  const { products } = useProducts();
   const isLoading = useProducts((state) => state.isLoading);
   const isAddedToCart = useProducts((state) => state.isAddedToCart);
   const error = useProducts((state) => state.error);
 
-  const fetchProducts = useProducts((state) => state.fetch);
+  const sortPrice = useProducts((state) => state.sortPrice);
+
   const addToCartProduct = useProducts((state) => state.addToCartProduct);
 
   const addToCartHandler = async (id: string) => {
     addToCartProduct(id);
   };
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
   return isLoading ? (
     <Loading />
   ) : error ? (
     <>
-      <div>{error}</div>
+      <Error msg={error} />
     </>
   ) : (
     <section className="h-[88%] w-full px-5  fixed overflow-auto scroll-none">
+      <SortButton />
       <div className="grid sm:grid-cols-2 xl:grid-cols-4 md:grid-cols-3  gap-5 animate-fade">
-        {products.map((product: ProductType, idx: number) => (
-          <div
-            key={idx}
-            className="border p-5 flex flex-col gap-3 shadow-md rounded-md justify-center items-center"
-          >
-            <div className="w-[12rem] h-[12rem] p-5 flex items-center justify-center">
-              <img src={product.img} alt="this is what is this" />
-            </div>
-            <div className="">
-              <div className=" line-clamp-2">
-                <h2>{product.title}</h2>
-              </div>
-              <div className="mt-1 flex gap-[5px]">
-                <span className="font-semibold text-xl">
-                  {product.textPrice}
-                </span>
-              </div>
-            </div>
-            <div className="flex gap-x-5 md:flex-col lg:flex-row md:gap-y-2 ">
-              <button className="bg-accent text-white rounded-lg  px-5 py-2">
-                order now
-              </button>
-              <div className="bg-orange-500  rounded-lg py-2 px-5">
-                {isAddedToCart !== product.id ? (
-                  <button onClick={() => addToCartHandler(product.id)}>
-                    add to cart
-                  </button>
-                ) : (
-                  <div>loading...</div>
-                )}
-              </div>
-            </div>
+        {products.map((product: ProductType) => (
+          <div key={product.id}>
+            <ProductCard
+              product={product}
+              isAddedToCart={isAddedToCart}
+              addToCartHandler={addToCartHandler}
+            />
           </div>
         ))}
       </div>

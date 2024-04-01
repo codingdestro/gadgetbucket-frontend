@@ -1,36 +1,27 @@
-import axios from "axios";
 import Loading from "../components/status/Loading";
 import useCart from "../store/useCarts";
 import { useEffect } from "react";
+import Error from "../components/status/Error";
 
 const Cart = () => {
-  const cart = useCart((state) => state.cart);
+  const { cart } = useCart();
+  const deleteCartItem = useCart((state) => state.deleteCartItem);
   const isLoading = useCart((state) => state.isLoading);
   const error = useCart((state) => state.error);
   const fetchCart = useCart((state) => state.fetchCart);
+
   useEffect(() => {
     fetchCart();
   }, []);
-
-  const deleteCartItem = async (cartId: string) => {
-    try {
-      await axios.delete("/carts/remove", {
-        data: {
-          cartId,
-        },
-      });
-      fetchCart();
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return isLoading ? (
     <Loading />
   ) : error ? (
     <>
-      <div>{error}</div>
+      <Error msg={error} />
     </>
+  ) : cart.length === 0 ? (
+    <Error msg="cart is empty" />
   ) : (
     <section className="p-5">
       <div className="flex flex-wrap gap-2 ">

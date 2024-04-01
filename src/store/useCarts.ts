@@ -10,6 +10,7 @@ type State = {
 
 type Action = {
   fetchCart: () => Promise<any>;
+  deleteCartItem: (id: string) => Promise<any>;
 };
 
 const useCart = create<State & Action>((set) => ({
@@ -27,13 +28,28 @@ const useCart = create<State & Action>((set) => ({
       const { data } = await axios.post("/carts/get", {
         token,
       });
-      if (data?.carts?.length === 0) {
-        set({ isLoading: false, error: "cart is empty", cart: [] });
-        return;
-      }
       set({ isLoading: false, error: "", cart: data?.carts });
     } catch (error) {
       console.log("failed to fetch user cart");
+    }
+  },
+
+  async deleteCartItem(id) {
+    try {
+      const token = localStorage.getItem("token");
+      const { data } = await axios.delete("/carts/remove", {
+        data: {
+          token,
+          cartId: id,
+        },
+      });
+      if (data.msg) {
+        set((state) => ({
+          cart: state.cart.filter((item) => item.id !== id),
+        }));
+      }
+    } catch (error) {
+      console.log(error);
     }
   },
 }));
