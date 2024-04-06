@@ -14,12 +14,27 @@ export default {
 
       animation: {
         fade: "fadeIn .5s ease-in-out",
+        fadeInOut: "fadeInOut 5s ease-in  forwards",
       },
 
       keyframes: {
         fadeIn: {
           from: { opacity: 0 },
           to: { opacity: 1 },
+        },
+        fadeInOut: {
+          "0%": {
+            opacity: 0,
+          },
+          "25%":{
+            opacity:1
+          },"80%":{
+            opacity:1
+          },
+
+          "100%": {
+            opacity: 0,
+          },
         },
       },
     },

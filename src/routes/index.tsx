@@ -12,6 +12,7 @@ import Home from "../pages/home";
 import Signin from "../pages/accounts/Signin";
 import Login from "../pages/accounts/Login";
 import Cart from "../pages/Cart";
+import MakeOrder from "../pages/MakeOrder";
 
 
 
@@ -21,6 +22,7 @@ const route = createBrowserRouter(
       <Route loader={TokenLoader} element={<PrivateRoute />}>
       <Route element={<Navbar />}>
         <Route path="" element={<Home />} />
+        <Route path="make/order/:Id" element={<MakeOrder />} />
         <Route path="cart" element={<Cart />} />
         <Route path="order" element={<div>welcome to order</div>} />
       </Route>

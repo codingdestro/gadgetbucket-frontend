@@ -9,7 +9,7 @@ const SortButton = () => {
   };
   return (
     <>
-      <section className="flex border max-w-[200px] justify-center gap-2 mb-2 items-center">
+      <section className="flex border max-w-[200px] justify-center gap-x-2  ml-5 items-center">
         <div className="text-lg">
           <span>sort :</span>
         </div>

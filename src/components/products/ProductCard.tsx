@@ -1,16 +1,17 @@
+import { useNavigate } from "react-router";
 import { ProductType } from "../../types/productType";
+import useProducts from "../../store/useProducts";
 
 interface Props {
   product: ProductType;
-  isAddedToCart: string;
-  addToCartHandler: (id: string) => void;
 }
+const ProductCard = ({ product }: Props) => {
+  const addToCartProduct = useProducts((state) => state.addToCartProduct);
+  const isAddedToCart = useProducts((state) => state.isAddedToCart);
 
-const ProductCard = ({ product, isAddedToCart, addToCartHandler }: Props) => {
+  const redirect = useNavigate();
   return (
-    <div
-      className="border p-5 flex flex-col gap-3 shadow-md rounded-md justify-center items-center"
-    >
+    <div className="border p-5 flex flex-col gap-3 shadow-md rounded-md justify-center items-center">
       <div className="w-[12rem] h-[12rem] p-5 flex items-center justify-center">
         <img src={product.img} alt="this is what is this" />
       </div>
@@ -23,12 +24,15 @@ const ProductCard = ({ product, isAddedToCart, addToCartHandler }: Props) => {
         </div>
       </div>
       <div className="flex gap-x-5 md:flex-col lg:flex-row md:gap-y-2 ">
-        <button className="bg-accent text-white rounded-lg  px-5 py-2">
+        <button
+          className="bg-accent text-white rounded-lg  px-5 py-2"
+          onClick={() => redirect(`/make/order/${product.id}`)}
+        >
           order now
         </button>
         <div className="bg-orange-500  rounded-lg py-2 px-5">
           {isAddedToCart !== product.id ? (
-            <button onClick={() => addToCartHandler(product.id)}>
+            <button onClick={() => !isAddedToCart && addToCartProduct(product.id)}>
               add to cart
             </button>
           ) : (

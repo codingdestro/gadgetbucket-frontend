@@ -1,23 +1,11 @@
 import { useState } from "react";
-import { useLocation, Outlet, Link } from "react-router-dom";
-// import "../../styles/navbar.scss";
-const paths = [
-  {
-    path: "/",
-    tab: "home",
-  },
-  {
-    path: "/cart",
-    tab: "cart",
-  },
-  {
-    path: "/order",
-    tab: "order",
-  },
-];
+import { Outlet, Link } from "react-router-dom";
+import useProducts from "../../store/useProducts";
+import Menu from "./Menu";
 const Navbar = () => {
-  const location = useLocation();
   const [show, setShow] = useState(false);
+  const { clearCartNotify } = useProducts((state) => state);
+
   return (
     <>
       <section
@@ -27,7 +15,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center ssm:block">
           <div className="text-2xl font-semibold tracking-wider italic">
             <Link to={"/"}>
-            <h2>GadgetWorld</h2>
+              <h2>GadgetWorld</h2>
             </Link>
           </div>
           <div className="ssm:hidden cursor-pointer">
@@ -45,34 +33,20 @@ const Navbar = () => {
             show ? "show" : "hide"
           } `}
         >
-          {paths.map(
-            ({ path, tab }: { path: string; tab: string }, idx: number) => {
-              return (
-                <Link
-                  to={path}
-                  onClick={() => setShow((prev: boolean) => !prev)}
-                  // className={`box `}
-                  className={`flex items-center gap-2 
-                  ${location.pathname === path ? " bg-accent text-white" : ""}
-                  border px-4 py-1 rounded-lg`}
-                  key={idx}
-                >
-                  <img
-                    className="w-4 h-4"
-                    src={`/assets/${tab}.png`}
-                    alt="home"
-                  />
-                  <span className="text-lg capitalize">{tab}</span>
-                </Link>
-              );
-            }
-          )}
+          <Menu path="/" tab="home" show={true} />
+          <Menu
+            onclickHandler={clearCartNotify}
+            path="/cart"
+            tab="cart"
+            show={false}
+          />
+          <Menu path="/order" tab="order" show={false} />
           <div className="border px-5 py-1 bg-sky-500 rounded-lg">
             <Link
               to={"account/signin"}
-              onClick={() => localStorage.setItem("token", "")}
+              onClick={() => localStorage.removeItem("token")}
             >
-              login
+              logout
             </Link>
           </div>
         </div>

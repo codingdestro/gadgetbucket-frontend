@@ -7,8 +7,11 @@ axios.defaults.baseURL = "http://localhost:5555";
 type State = {
   products: ProductType[];
   isLoading: boolean;
+  cartNotify:boolean;
   error: string;
   isAddedToCart: string;
+  selectedProduct: { id: string; img: string; title: string; price: number };
+  clearCartNotify:()=>void
 };
 
 type Action = {
@@ -19,9 +22,16 @@ type Action = {
 
 const useProducts = create<State & Action>((set) => ({
   products: [],
+  selectedProduct: {
+    id: "",
+    title: "",
+    img: "",
+    price: 0,
+  },
   isLoading: true,
   error: "",
   isAddedToCart: "",
+  cartNotify:false,
   sortPrice(order) {
     set({ isLoading: true });
     set((state) => ({
@@ -37,6 +47,7 @@ const useProducts = create<State & Action>((set) => ({
       if (data?.products) set({ isLoading: false, products: data?.products });
       console.log("fetching products");
     } catch (error) {
+      set({ isLoading: false, error: "error occured" });
       console.log("failing to fetch the products using zustand");
     }
   },
@@ -50,10 +61,15 @@ const useProducts = create<State & Action>((set) => ({
           token,
           productId: id,
         });
-        set({ isAddedToCart: "" });
+        set({ isAddedToCart: "" ,cartNotify:true});
+
       }
     } catch (error) {}
   },
+
+  clearCartNotify(){
+    set({cartNotify:false})
+  }
 }));
 
 export default useProducts;
