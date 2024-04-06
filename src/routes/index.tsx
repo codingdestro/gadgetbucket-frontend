@@ -13,19 +13,18 @@ import Signin from "../pages/accounts/Signin";
 import Login from "../pages/accounts/Login";
 import Cart from "../pages/Cart";
 import MakeOrder from "../pages/MakeOrder";
-
-
+import Order from "../pages/Order";
 
 const route = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route loader={TokenLoader} element={<PrivateRoute />}>
-      <Route element={<Navbar />}>
-        <Route path="" element={<Home />} />
-        <Route path="make/order/:Id" element={<MakeOrder />} />
-        <Route path="cart" element={<Cart />} />
-        <Route path="order" element={<div>welcome to order</div>} />
-      </Route>
+        <Route element={<Navbar />}>
+          <Route path="" element={<Home />} />
+          <Route path="make/order/:Id" element={<MakeOrder />} />
+          <Route path="cart" element={<Cart />} />
+          <Route path="order" element={<Order/>} />
+        </Route>
       </Route>
       <Route path="/account" loader={TokenLoader} element={<Account />}>
         <Route path="signin" Component={Signin} />

@@ -10,6 +10,10 @@ export default {
         primary: "#000080",
         secondary: "#708090",
         accent: "#4682B4",
+        pending: "#FFA500",
+        ordered: "#008000",
+        cancelled: " #FF0000",
+        delivered: "#0000FF",
       },
 
       animation: {
@@ -26,10 +30,11 @@ export default {
           "0%": {
             opacity: 0,
           },
-          "25%":{
-            opacity:1
-          },"80%":{
-            opacity:1
+          "25%": {
+            opacity: 1,
+          },
+          "80%": {
+            opacity: 1,
           },
 
           "100%": {

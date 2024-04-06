@@ -13,13 +13,12 @@ input::placeholder {
   scale: 0.98;
 }
 
-
-input[type="number"]::-webkit-inner-spin-button{
- display: none; 
+input[type="number"]::-webkit-inner-spin-button {
+  display: none;
 }
 
-.scroll-none::-webkit-scrollbar{
-display: none;
+.scroll-none::-webkit-scrollbar {
+  display: none;
 }
 
 .animate-popup {
@@ -65,4 +64,27 @@ display: none;
   .hide {
     animation: hideToTop 0.2s forwards;
   }
+}
+
+/* pending: "#FFA500",
+        ordered: "#008000",
+        cancelled: " #FF0000",
+        delivered: "#0000FF", */
+
+.pending {
+  color: hsl(39, 100%, 50%);
+  background-color: rgba(255, 166, 0, 0.1);
+}
+.ordered {
+  color: #008000;
+  background-color: rgba(0, 128, 0, 0.05);
+}
+.cancelled {
+  color: #ff0000;
+  background-color: rgba(255, 0, 0, 0.05);
+}
+
+.delivered {
+  color: #0000ff;
+  background-color: rgba(0, 0, 255, 0.05);
 }
