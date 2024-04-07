@@ -1,5 +1,4 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Login } from "../../api/signin";
 import
   InputForm,
 {
@@ -7,13 +6,14 @@ import
   SubmitButton,
   useFieldState,
 } from "../../components/inputFields";
+import api from "../../api";
 
 const Home = () => {
   const { state, setInputValues } = useFieldState({ password: "", email: "" });
   const redirect = useNavigate();
 
   const loginUser = async () => {
-    if (await Login(state)) redirect("/");
+    if (await api.sign.login(state)) redirect("/");
   };
   return (
     <InputForm heading="Login">

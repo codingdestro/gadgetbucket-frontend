@@ -8,7 +8,7 @@ import Alert, { useShow } from "../components/status/Alert";
 import { useNavigate, useParams } from "react-router";
 import { useAuthId } from "../services/authId";
 import Error from "./Error";
-import axios from "axios";
+import api from "../api";
 const MakeOrder = () => {
   const { show, showTrigger } = useShow();
   const { state, setInputValues } = useFieldState({ address: "", contact: "" });
@@ -16,27 +16,29 @@ const MakeOrder = () => {
   const params = useParams();
   const redirect = useNavigate();
   const { valid, validate, data } = useAuthId();
-  const [disable,setDisable] = useState(false)
+  const [disable, setDisable] = useState(false);
 
   useEffect(() => {
     const { Id } = params;
-    if (!Id) redirect("/");
-    else {
-      validate(Id);
-    }
+    !Id ? redirect("/") : validate(Id);
   }, []);
 
   const makeOrder = async () => {
     try {
-      setDisable(true)
+      setDisable(true);
       const token = localStorage.getItem("token");
-      const { data } = await axios.post("/orders/make", {
-        address: state.address,
-        contact: state.contact,
+      const id = params.Id;
+      if (!id || !token) {
+        setDisable(false);
+        return;
+      }
+      const data = await api.products.makeOrder(
         token,
-        productId: params.Id,
-      });
-      setDisable(false)
+        state.address,
+        state.contact,
+        id
+      );
+      setDisable(false);
       if (data.msg == "order completed") redirect("/");
     } catch (error) {
       console.log(error);
@@ -52,6 +54,7 @@ const MakeOrder = () => {
     } else setMessage("please fill info");
     showTrigger();
   };
+
   return !valid ? (
     <>
       <div>
@@ -80,7 +83,9 @@ const MakeOrder = () => {
             <span className="font-[600] italic">{data}</span>
           </p>
         </div>
-        <SubmitButton onSubmit={()=>!disable && submitOrder()}>confirm order</SubmitButton>
+        <SubmitButton onSubmit={() => !disable && submitOrder()}>
+          confirm order
+        </SubmitButton>
       </InputForm>
     </section>
   );

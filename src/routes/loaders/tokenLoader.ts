@@ -1,14 +1,13 @@
-import { authenticateToken } from "../../services/authenticate";
+import api from "../../api";
+
 const loader = async () => {
-  let token = localStorage.getItem("token") || "";
-  if (token) {
-    try {
-      const res = await authenticateToken(token);
-      return res.token  ? true : false;
-    } catch {
-      return false;
-    }
-  } else {
+  let token = localStorage.getItem("token");
+  try {
+    if (token) {
+      const { status, data } = await api.tokenAuth(token);
+      return status === 200 ? (data.token ? true : false) : false;
+    } else return false;
+  } catch {
     return false;
   }
 };

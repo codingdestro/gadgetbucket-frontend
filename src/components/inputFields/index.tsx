@@ -64,8 +64,8 @@ export const InputBoxText = ({
 
 const InputForm = ({ children, heading }: ChildrenProp) => {
   return (
-    <div>
-      <section className="border w-[350px] min-h-[500px] p-5  flex  flex-wrap items-center shadow-md rounded-3xl relative ">
+    <div className="relative">
+      <section className=" bg-white border w-[350px] min-h-[500px] p-5  flex  flex-wrap items-center shadow-md rounded-3xl relative ">
         <h1 className="text-3xl text-center w-full capitalize font-[500] mb-10 ">
           {heading}{" "}
         </h1>

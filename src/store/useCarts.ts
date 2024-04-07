@@ -1,11 +1,16 @@
 import { create } from "zustand";
-import axios from "axios";
 import { ProductType } from "../types/productType";
-
+import api from "../api";
+export type CartType = {
+  id: string;
+  product: ProductType;
+  payment: number;
+};
 type State = {
   isLoading: boolean;
   error: string;
-  cart: ProductType[];
+  cart: CartType[];
+  payment: number;
 };
 
 type Action = {
@@ -17,6 +22,7 @@ const useCart = create<State & Action>((set) => ({
   isLoading: true,
   error: "",
   cart: [],
+  payment: 0,
   async fetchCart() {
     set({ error: "", isLoading: true });
     try {
@@ -25,10 +31,14 @@ const useCart = create<State & Action>((set) => ({
         set({ error: "Empty token", isLoading: false });
         return;
       }
-      const { data } = await axios.post("/carts/get", {
-        token,
+      const data = await api.cart.get(token);
+      console.log(data);
+      set({
+        isLoading: false,
+        error: "",
+        cart: data?.carts,
+        payment: data?.payment,
       });
-      set({ isLoading: false, error: "", cart: data?.carts });
     } catch (error) {
       console.log("failed to fetch user cart");
     }
@@ -36,16 +46,18 @@ const useCart = create<State & Action>((set) => ({
 
   async deleteCartItem(id) {
     try {
-      const token = localStorage.getItem("token");
-      const { data } = await axios.delete("/carts/remove", {
-        data: {
-          token,
-          cartId: id,
-        },
-      });
+      const token = localStorage.getItem("token") || "";
+      const data = await api.cart.delete(token, id);
       if (data.msg) {
+        let price = 0;
         set((state) => ({
-          cart: state.cart.filter((item) => item.id !== id),
+          cart: state.cart.filter((item: CartType) => {
+            if (item.id !== id) {
+              price = item.product.price;
+              return true;
+            } else false;
+          }),
+          payment: state.payment - price,
         }));
       }
     } catch (error) {

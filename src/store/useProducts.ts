@@ -1,17 +1,15 @@
 import { create } from "zustand";
 import { ProductType } from "../types/productType";
-import axios from "axios";
-
-axios.defaults.baseURL = "http://localhost:5555";
+import api from "../api";
 
 type State = {
   products: ProductType[];
   isLoading: boolean;
-  cartNotify:boolean;
+  cartNotify: boolean;
   error: string;
   isAddedToCart: string;
   selectedProduct: { id: string; img: string; title: string; price: number };
-  clearCartNotify:()=>void
+  clearCartNotify: () => void;
 };
 
 type Action = {
@@ -31,7 +29,8 @@ const useProducts = create<State & Action>((set) => ({
   isLoading: true,
   error: "",
   isAddedToCart: "",
-  cartNotify:false,
+  cartNotify: false,
+
   sortPrice(order) {
     set({ isLoading: true });
     set((state) => ({
@@ -41,14 +40,13 @@ const useProducts = create<State & Action>((set) => ({
     }));
     set({ isLoading: false });
   },
+
   async fetch() {
     try {
-      const { data } = await axios.get("/products/get");
+      const data = await api.products.get();
       if (data?.products) set({ isLoading: false, products: data?.products });
-      console.log("fetching products");
     } catch (error) {
       set({ isLoading: false, error: "error occured" });
-      console.log("failing to fetch the products using zustand");
     }
   },
 
@@ -57,19 +55,15 @@ const useProducts = create<State & Action>((set) => ({
       const token = localStorage.getItem("token");
       set({ isAddedToCart: id });
       if (token) {
-        await axios.post("/carts/add", {
-          token,
-          productId: id,
-        });
-        set({ isAddedToCart: "" ,cartNotify:true});
-
+        await api.products.add(token, id);
+        set({ isAddedToCart: "", cartNotify: true });
       }
     } catch (error) {}
   },
 
-  clearCartNotify(){
-    set({cartNotify:false})
-  }
+  clearCartNotify() {
+    set({ cartNotify: false });
+  },
 }));
 
 export default useProducts;

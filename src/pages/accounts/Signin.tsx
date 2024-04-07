@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Signin } from "../../api/signin";
-import
-  InputForm,
-{
+import InputForm, {
   InputBoxText,
   SubmitButton,
   useFieldState,
 } from "../../components/inputFields";
+import api from "../../api";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -26,7 +24,7 @@ const Home = () => {
   };
 
   const signinUser = async () => {
-    await Signin({
+    await api.sign.signin({
       ...state,
       password: password[0],
     });
