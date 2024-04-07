@@ -36,7 +36,10 @@ const CartCheckout = () => {
   return (
     <>
       {show && (
-        <div className=" absolute top-[0] flex items-center justify-center w-full h-full backdrop-blur-sm ">
+        <div
+          className="absolute top-[1%] translate-y-[-13%] flex  items-center justify-center
+         w-full h-screen backdrop-blur-sm "
+        >
           <Alert show={alertButton.show} msg="invalid input" />
           <div className="">
             <InputForm heading="checkout order">
@@ -60,12 +63,12 @@ const CartCheckout = () => {
         </div>
       )}
       <div
-        className=" bottom-11 bg-white w-[400px] flex items-center justify-between p-5 border 
+        className=" bottom-11 bg-white w-[380px] flex items-center justify-between p-2 border 
        rounded-lg shadow-md
       "
       >
         <p className=" capitalize my-5 tracking-wide">
-          payment : ₹ {payment.toLocaleString("en-IN")}
+          total : ₹ {payment.toLocaleString("en-IN")}
         </p>
         <button
           className="px-4  py-2 bg-blue-300 rounded-lg text-blue-700"

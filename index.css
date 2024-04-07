@@ -21,6 +21,13 @@ input[type="number"]::-webkit-inner-spin-button {
   display: none;
 }
 
+.outlet{
+  /* top: 100px; */
+  /* position: fixed; */
+  height: calc(100svh - 120px); 
+  /* overflow: auto; */
+}
+
 .animate-popup {
   animation: popup 0.4s ease-in both;
 }

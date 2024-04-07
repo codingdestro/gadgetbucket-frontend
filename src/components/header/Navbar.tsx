@@ -9,10 +9,10 @@ const Navbar = () => {
   const toggleShow = () => setShow((prev: boolean) => !prev);
 
   return (
-    <>
+    <div className="flex flex-col items-enter justify-between">
       <section
-        className="border flex flex-col ssm:flex-row 
-      ssm:items-center justify-center ssm:justify-between p-5 border-b-2 mb-5 "
+        className="border flex flex-col ssm:flex-row gap-5  
+      ssm:items-center justify-between ssm:justify-between p-5 border-b-2 mb-5 "
       >
         <div className="flex justify-between items-center ssm:block">
           <div className="text-2xl font-semibold tracking-wider italic">
@@ -58,10 +58,10 @@ const Navbar = () => {
           </div>
         </div>
       </section>
-      <section className=" ">
+      <section className="  flex items-center justify-center ">
         <Outlet />
       </section>
-    </>
+    </div>
   );
 };
 

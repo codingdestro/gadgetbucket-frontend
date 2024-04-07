@@ -46,19 +46,7 @@ const useCart = create<State & Action>((set) => ({
   async deleteCartItem(id) {
     try {
       const token = localStorage.getItem("token") || "";
-      const data = await api.cart.delete(token, id);
-      if (data.msg) {
-        let price = 0;
-        set((state) => ({
-          cart: state.cart.filter((item: CartType) => {
-            if (item.id !== id) {
-              price = item.product.price;
-              return true;
-            } else false;
-          }),
-          payment: state.payment - price,
-        }));
-      }
+      await api.cart.delete(token, id);
     } catch (error) {
       console.log(error);
     }

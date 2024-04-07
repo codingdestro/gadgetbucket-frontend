@@ -24,10 +24,10 @@ const Cart = () => {
   ) : cart.length === 0 ? (
     <Error msg="cart is empty" />
   ) : (
-    <section className="flex px-2 flex-col gap-y-5 relative items-center  ">
+    <section className="flex   sm:flex-row flex-col gap-5  relative items-center sm:items-start  ">
       <div
-        className=" max-w-[28cm] h-[800px] gap-5 flex flex-col border
-      rounded-lg p-3 shadow-md scroll-none overflow-auto"
+        className=" max-w-[600px] outlet ax-h-[620px] gap-y-5 flex flex-col border
+      rounded-lg  shadow-md scroll-none overflow-auto"
       >
         {cart.map(({ product, id }: CartType, idx: number) => {
           return (
