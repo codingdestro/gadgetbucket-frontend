@@ -8,7 +8,7 @@ export const useShow = () => {
 
     setTimeout(() => {
       setShow(false);
-    }, 5000);
+    },  3000);
   };
   return { show, showTrigger };
 };
@@ -17,7 +17,7 @@ const Alert = ({ show, msg }: { show: boolean; msg: string }) => {
   return (
     show && (
       <section
-        className="min-w-[200px]
+        className="min-w-[300px]
       animate-fadeInOut
       
       rounded-3xl  

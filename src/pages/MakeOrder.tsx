@@ -4,11 +4,13 @@ import InputForm, {
   SubmitButton,
   useFieldState,
 } from "../components/inputFields";
+
 import Alert, { useShow } from "../components/status/Alert";
 import { useNavigate, useParams } from "react-router";
 import { useAuthId } from "../services/authId";
 import Error from "./Error";
 import api from "../api";
+
 const MakeOrder = () => {
   const { show, showTrigger } = useShow();
   const { state, setInputValues } = useFieldState({ address: "", contact: "" });
@@ -83,7 +85,7 @@ const MakeOrder = () => {
             <span className="font-[600] italic">{data}</span>
           </p>
         </div>
-        <SubmitButton onSubmit={() => !disable && submitOrder()}>
+        <SubmitButton disable={disable} onSubmit={() => submitOrder()}>
           confirm order
         </SubmitButton>
       </InputForm>

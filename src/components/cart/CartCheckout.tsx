@@ -20,12 +20,7 @@ const CartCheckout = () => {
   const handleSubmit = async () => {
     const token = localStorage.getItem("token") || "";
     try {
-      if (
-        state.address &&
-        state.contact &&
-        state.contact.length === 10 &&
-        !disable
-      ) {
+      if (state.address && state.contact && state.contact.length === 10) {
         setDisable(true);
         const data = await api.cart.order(token, state.address, state.contact);
         setShow(false);
@@ -51,8 +46,8 @@ const CartCheckout = () => {
                 name="contact"
                 type="number"
               />
-              <SubmitButton onSubmit={handleSubmit}>
-                {disable ? "loading..." : "confirm"}
+              <SubmitButton onSubmit={handleSubmit} disable={disable}>
+                confirm checkout
               </SubmitButton>
               <button
                 className="shadow-sm rounded-3xl p-2 cancelled"

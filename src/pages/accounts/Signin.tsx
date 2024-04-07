@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Alert, { useShow } from "../../components/status/Alert";
 import InputForm, {
   InputBoxText,
   SubmitButton,
@@ -8,11 +9,14 @@ import InputForm, {
 import api from "../../api";
 
 const Home = () => {
-  const navigate = useNavigate();
+  const redirect = useNavigate();
   const [password, setPassword] = useState<string[]>(["", ""]);
   const [match, setMatch] = useState(false);
   const { state, setInputValues } = useFieldState({ name: "", email: "" });
 
+  const [disable, setDisable] = useState(false);
+  const { show, showTrigger } = useShow();
+  const [message, setMessage] = useState("");
   const onChangeSetPassword = (value: string, id: number) => {
     setPassword((prev: string[]) => {
       let data = prev.map((e: string, idx: number) => (idx === id ? value : e));
@@ -24,15 +28,30 @@ const Home = () => {
   };
 
   const signinUser = async () => {
-    await api.sign.signin({
-      ...state,
-      password: password[0],
-    });
-    navigate("/");
+    setDisable(true);
+    try {
+      const data = await api.sign.signin({
+        ...state,
+        password: password[0],
+      });
+      if (data.msg === "new user created") {
+        setDisable(false);
+        redirect("/");
+      } else {
+        setMessage(data.err || data.msg);
+        showTrigger();
+        setDisable(false);
+      }
+    } catch {
+      setMessage("failed to login");
+      showTrigger();
+      setDisable(false);
+    }
   };
 
   return (
-    <>
+    <section>
+      <Alert show={show} msg={message} />
       <InputForm heading="Sign In">
         <InputBoxText
           name="name"
@@ -73,7 +92,9 @@ const Home = () => {
           </div>
         </div>
 
-        <SubmitButton onSubmit={signinUser}>signIn</SubmitButton>
+        <SubmitButton disable={disable} onSubmit={signinUser}>
+          signIn
+        </SubmitButton>
         <div className="text-center mt-2 bottom-5">
           <Link
             to={"../login"}
@@ -83,7 +104,7 @@ const Home = () => {
           </Link>
         </div>
       </InputForm>
-    </>
+    </section>
   );
 };
 

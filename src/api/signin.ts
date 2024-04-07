@@ -6,11 +6,11 @@ const sign = {
       const res = await axios.post("/account/signin", { ...user });
       if (res.data.token) {
         localStorage.setItem("token", res.data.token);
-        return true;
+        return res.data;
       }
-      return false;
+      return res.data;
     } catch (error) {
-      return false;
+      return "failed to signin";
     }
   },
   async login(user: { password: string; email: string }) {
@@ -18,11 +18,11 @@ const sign = {
       const res = await axios.post("/account/login", { ...user });
       if (res.data.token) {
         localStorage.setItem("token", res.data.token);
-        return true;
+        return res.data;
       }
-      return false;
+      return res.data;
     } catch (error) {
-      return false;
+      return "failed to login";
     }
   },
 };

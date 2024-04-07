@@ -25,16 +25,18 @@ interface InputBoxProp {
 export const SubmitButton = ({
   children,
   onSubmit,
+  disable,
 }: {
   children: string;
+  disable: boolean;
   onSubmit: () => void;
 }) => {
   return (
     <button
-      onClick={() => onSubmit()}
+      onClick={() => !disable && onSubmit()}
       className="w-full click py-2 border flex justify-center items-center rounded-3xl bg-gradient-to-r to-sky-400 from-pink-400 text-white capitalize"
     >
-      {children}
+      {disable ? "loading..." : children}
     </button>
   );
 };

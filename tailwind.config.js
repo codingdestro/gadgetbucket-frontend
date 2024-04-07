@@ -18,7 +18,7 @@ export default {
 
       animation: {
         fade: "fadeIn .5s ease-in-out",
-        fadeInOut: "fadeInOut 5s ease-in  forwards",
+        fadeInOut: "fadeInOut 2s ease-in  forwards",
       },
 
       keyframes: {

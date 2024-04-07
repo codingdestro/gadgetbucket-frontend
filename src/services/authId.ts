@@ -2,14 +2,15 @@ import { useState } from "react";
 import api from "../api";
 
 export const useAuthId = () => {
-  const [valid, setValid] = useState(false);
+  const [valid, setValid] = useState(true);
   const [data, setData] = useState("");
   const validate = async (id: string) => {
     try {
       const data = await api.validateProduct(id);
-      if (!data?.product) throw data.msg;
-      setData(data.product?.textPrice);
-      setValid(true);
+      if (data?.product) {
+        setData(data.product?.textPrice);
+      }else
+      setValid(false)
     } catch (error) {
       console.log(error);
     }

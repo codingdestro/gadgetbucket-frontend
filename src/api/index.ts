@@ -4,7 +4,8 @@ import cart from "./cart";
 import sign from "./signin";
 import orders from "./orders";
 
-axios.defaults.baseURL = "http://localhost:5555";
+// axios.defaults.baseURL = "http://localhost:5555";
+axios.defaults.baseURL = "http://192.168.1.72:5555";
 const api = {
   products,
   cart,

@@ -6,6 +6,8 @@ const Navbar = () => {
   const [show, setShow] = useState(false);
   const { clearCartNotify } = useProducts((state) => state);
 
+  const toggleShow = () => setShow((prev: boolean) => !prev);
+
   return (
     <>
       <section
@@ -19,7 +21,7 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="ssm:hidden cursor-pointer">
-            <span onClick={() => setShow((prev: boolean) => !prev)}>
+            <span onClick={toggleShow}>
               <img
                 src="https://cdn-icons-png.flaticon.com/512/12596/12596938.png"
                 width={32}
@@ -33,14 +35,19 @@ const Navbar = () => {
             show ? "show" : "hide"
           } `}
         >
-          <Menu path="/" tab="home" show={true} />
+          <Menu path="/" onclickHandler={toggleShow} tab="home" show={true} />
           <Menu
-            onclickHandler={clearCartNotify}
+            onclickHandler={toggleShow}
             path="/cart"
             tab="cart"
             show={false}
           />
-          <Menu path="/order" tab="order" show={false} />
+          <Menu
+            path="/order"
+            tab="order"
+            onclickHandler={toggleShow}
+            show={false}
+          />
           <div className="border px-5 py-1 bg-sky-500 rounded-lg">
             <Link
               to={"account/signin"}
