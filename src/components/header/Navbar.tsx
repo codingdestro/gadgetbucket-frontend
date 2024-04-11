@@ -1,23 +1,29 @@
 import { useState } from "react";
 import { Outlet, Link } from "react-router-dom";
-import useProducts from "../../store/useProducts";
 import Menu from "./Menu";
 const Navbar = () => {
   const [show, setShow] = useState(false);
-  const { clearCartNotify } = useProducts((state) => state);
 
   const toggleShow = () => setShow((prev: boolean) => !prev);
 
   return (
     <div className="flex flex-col items-enter justify-between">
       <section
-        className="border flex flex-col ssm:flex-row gap-5  
-      ssm:items-center justify-between ssm:justify-between p-5 border-b-2 mb-5 "
+        className="border flex flex-col ssm:flex-row   
+      ssm:items-center justify-between ssm:justify-between py-2 px-5 mb-5 border-b-2  "
       >
         <div className="flex justify-between items-center ssm:block">
           <div className="text-2xl font-semibold tracking-wider italic">
             <Link to={"/"}>
-              <h2>GadgetWorld</h2>
+              <div className="flex text-2xl items-center">
+                <span>Gadget B</span>
+                <img
+                  className="w-[24px] h-[24px]"
+                  src="https://cdn-icons-png.flaticon.com/512/2989/2989545.png"
+                  alt="box"
+                />
+                <span>cket</span>
+              </div>
             </Link>
           </div>
           <div className="ssm:hidden cursor-pointer">
