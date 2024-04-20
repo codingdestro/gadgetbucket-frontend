@@ -23,12 +23,13 @@ const Home = () => {
         setDisable(false);
         redirect("/");
       } else {
-        setMessage(data.err);
+        setMessage(data?.err);
         showTrigger();
         setDisable(false);
       }
     } catch (error) {
-      setMessage("failed to login")
+      setMessage("failed to login");
+      showTrigger();
       setDisable(false);
     }
   };
