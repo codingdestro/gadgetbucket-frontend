@@ -4,7 +4,7 @@ import cart from "./cart";
 import sign from "./signin";
 import orders from "./orders";
 
-axios.defaults.baseURL = import.meta.env.API_URL ||"https://strong-firmly-fawn.ngrok-free.app";
+axios.defaults.baseURL = import.meta.env.API_URL || "/api/";
 const api = {
   products,
   cart,
