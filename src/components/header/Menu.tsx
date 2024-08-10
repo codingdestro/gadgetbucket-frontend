@@ -1,7 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 
 interface Props {
-  show: boolean;
   path: string;
   tab: string;
   onclickHandler?: () => void;
@@ -18,7 +17,7 @@ const Menu = ({ path, tab, onclickHandler }: Props) => {
                   border px-4 py-1 rounded-lg`}
     >
       <img className="w-4 h-4" src={`/assets/${tab}.png`} alt="home" />
-      <span className="text-lg capitalize">{tab}</span>
+      <span className="text-sm md:text-md capitalize">{tab}</span>
     </Link>
   );
 };

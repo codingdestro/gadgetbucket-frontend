@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer {
+  .menubar-open {
+    transform: translateX(100%);
+    opacity: 0;
+    transition:
+      transform 0.5s ease-out,
+      opacity 0.5s ease-out;
+  }
+
+  .menubar-open.active {
+    transform: translateX(0);
+    display: flex;
+    opacity: 1;
+  }
+}
+
 input::placeholder {
   @apply text-sm;
 }
@@ -21,10 +37,10 @@ input[type="number"]::-webkit-inner-spin-button {
   display: none;
 }
 
-.outlet{
+.outlet {
   /* top: 100px; */
   /* position: fixed; */
-  height: calc(100svh - 120px); 
+  height: calc(100svh - 120px);
   /* overflow: auto; */
 }
 
