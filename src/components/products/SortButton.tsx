@@ -1,3 +1,4 @@
+import SelectOptions from "./SelectOptions";
 import useProducts from "../../store/useProducts";
 const SortButton = () => {
   const sortPrice = useProducts((state) => state.sortPrice);
@@ -9,18 +10,11 @@ const SortButton = () => {
   };
   return (
     <>
-      <section className="flex border max-w-[200px] justify-center gap-x-2  ml-5 items-center">
-        <div className="text-lg">
-          <span>sort :</span>
+      <section className="flex gap-2 text-sm items-center border rounded-md  cursor-pointer ">
+        <div className="w-6 ml-2">
+          <img src="/assets/sort.png" />
         </div>
-        <select
-          className="bg-transparent border-none px-2 py-2 rounded-lg outline-none cursor-pointer"
-          onChange={(e) => handleSelectedOption(e.target.value)}
-        >
-          <option value="default">defult</option>
-          <option value="low">low to high</option>
-          <option value="high">high to low</option>
-        </select>
+        <SelectOptions onSelect={(value) => handleSelectedOption(value)} />
       </section>
     </>
   );

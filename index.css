@@ -16,6 +16,16 @@
     display: flex;
     opacity: 1;
   }
+
+  .select-bar {
+    translate: -32% 5px;
+    width: 8rem;
+    scale: 0;
+    transition: scale 0.2s ease-in;
+  }
+  .select-bar.active {
+    scale: 1;
+  }
 }
 
 input::placeholder {
