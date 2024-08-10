@@ -11,33 +11,38 @@ const ProductCard = ({ product }: Props) => {
 
   const redirect = useNavigate();
   return (
-    <div className="border p-5 flex flex-col gap-3 shadow-md rounded-md justify-center items-center">
-      <div className="w-[12rem] h-[12rem] p-5 flex items-center justify-center">
-        <img src={product.img} alt="this is what is this" />
-      </div>
-      <div className="">
-        <div className=" line-clamp-2">
+    <div className="border w-[380px] md:w-[600px] lg:w-[800px] px-2 gap-x-5 py-5 flex shadow-md rounded-md justify-center items-center">
+      <img
+        className="w-[100px] lg:w-[160px]"
+        src={product.img}
+        alt={product.img}
+      />
+
+      <div className="flex flex-col text-sm gap-y-2 items-end">
+        <div className=" line-clamp-3">
           <h2>{product.title}</h2>
         </div>
-        <div className="mt-1 flex gap-[5px]">
-          <span className="font-semibold text-xl">{product.textPrice}</span>
-        </div>
-      </div>
-      <div className="flex gap-x-5 md:flex-col lg:flex-row md:gap-y-2 ">
-        <button
-          className="bg-accent text-white rounded-lg  px-5 py-2"
-          onClick={() => redirect(`/make/order/${product.id}`)}
-        >
-          order now
-        </button>
-        <div className="bg-orange-500  rounded-lg py-2 px-5">
-          {isAddedToCart !== product.id ? (
-            <button onClick={() => !isAddedToCart && addToCartProduct(product.id)}>
-              add to cart
-            </button>
-          ) : (
-            <div>loading...</div>
-          )}
+
+        <span className="font-[600] self-start ">{product.textPrice}</span>
+
+        <div className="flex gap-x-2">
+          <button
+            className="bg-accent text-white rounded-lg text-sm px-3 py-2"
+            onClick={() => redirect(`/make/order/${product.id}`)}
+          >
+            order now
+          </button>
+          <div className="bg-orange-500  rounded-lg py-2 px-5">
+            {isAddedToCart !== product.id ? (
+              <button
+                onClick={() => !isAddedToCart && addToCartProduct(product.id)}
+              >
+                add to cart
+              </button>
+            ) : (
+              <div>loading...</div>
+            )}
+          </div>
         </div>
       </div>
     </div>

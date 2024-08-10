@@ -44,7 +44,8 @@ const useProducts = create<State & Action>((set) => ({
   async fetch() {
     try {
       const data = await api.products.get();
-      if (data?.products) set({ isLoading: false, products: data?.products });
+      if (data?.productList)
+        set({ isLoading: false, products: data?.productList });
     } catch (error) {
       set({ isLoading: false, error: "error occured" });
     }
@@ -58,7 +59,9 @@ const useProducts = create<State & Action>((set) => ({
         await api.products.add(token, id);
         set({ isAddedToCart: "", cartNotify: true });
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   },
 
   clearCartNotify() {

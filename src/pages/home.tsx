@@ -17,17 +17,18 @@ const home = () => {
       <Error msg={error || "error occure!"} />
     </>
   ) : (
-    <section className="">
-      <SortButton />
-      <section className="w-full px-5  ">
-        <div className="grid sm:grid-cols-2 xl:grid-cols-5 md:grid-cols-3  gap-5 animate-fade">
-          {products.map((product: ProductType, idx: number) => (
-            <div key={idx}>
-              <ProductCard product={product} />
-            </div>
-          ))}
+    <section className="w-full flex flex-col  items-center">
+      <div className="flex max-w-[800px] flex-col items-center  gap-5 animate-fade">
+        <div className="self-start">
+          <SortButton />
         </div>
-      </section>
+        <div className="w-full border" />
+        {products.map((product: ProductType, idx: number) => (
+          <div key={idx}>
+            <ProductCard product={product} />
+          </div>
+        ))}
+      </div>
     </section>
   );
 };

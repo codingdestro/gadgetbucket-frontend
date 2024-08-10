@@ -11,9 +11,10 @@ const useFetchOrders = () => {
 
     try {
       const data = await api.orders.get(token);
-      if (data?.orders) {
+      if (data?.orderList) {
+        console.log(data);
         setSuccess(true);
-        setOrders(data?.orders);
+        setOrders(data?.orderList);
       } else {
         setSuccess(false);
       }

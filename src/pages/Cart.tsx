@@ -21,7 +21,7 @@ const Cart = () => {
     <>
       <Error msg={error} />
     </>
-  ) : cart.length === 0 ? (
+  ) : !cart || cart.length === 0 ? (
     <Error msg="cart is empty" />
   ) : (
     <section className="flex   sm:flex-row flex-col gap-5  relative items-center sm:items-start  ">
@@ -29,13 +29,13 @@ const Cart = () => {
         className=" max-w-[600px] outlet ax-h-[620px] gap-y-5 flex flex-col border
       rounded-lg  shadow-md scroll-none overflow-auto"
       >
-        {cart.map(({ product, id }: CartType, idx: number) => {
+        {cart.map(({ products, id }: CartType, idx: number) => {
           return (
             <CartProductCard
               id={id}
-              img={product.img}
-              title={product.title}
-              price={product.price}
+              img={products.img}
+              title={products.title}
+              price={products.price}
               key={idx}
             />
           );
