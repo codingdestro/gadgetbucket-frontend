@@ -13,19 +13,14 @@ const Navbar = () => {
       ssm:items-center justify-between ssm:justify-between py-2 px-5 mb-5 border-b-2  "
       >
         <div className="flex justify-between items-center ssm:block">
-          <div className="text-2xl font-semibold tracking-wider italic">
+          <div className="text-md font-semibold tracking-wider italic">
             <Link to={"/"}>
-              <div className="flex text-2xl items-center">
-                <span>Gadget B</span>
-                <img
-                  className="w-[24px] h-[24px]"
-                  src="https://cdn-icons-png.flaticon.com/512/2989/2989545.png"
-                  alt="box"
-                />
-                <span>cket</span>
+              <div className="flex text-md items-center">
+                <span>Gadget Bucket</span>
               </div>
             </Link>
           </div>
+
           <div className="ssm:hidden cursor-pointer">
             <span onClick={toggleShow}>
               <img
@@ -64,7 +59,7 @@ const Navbar = () => {
           </div>
         </div>
       </section>
-      <section className="  flex items-center justify-center ">
+      <section className="flex items-center justify-center ">
         <Outlet />
       </section>
     </div>
