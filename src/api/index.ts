@@ -4,7 +4,8 @@ import cart from "./cart";
 import sign from "./signin";
 import orders from "./orders";
 
-axios.defaults.baseURL = import.meta.env.API_URL || "/api/";
+axios.defaults.baseURL =
+  import.meta.env.VITE_API_URL as string;
 const api = {
   products,
   cart,

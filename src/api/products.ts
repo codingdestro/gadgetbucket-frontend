@@ -2,6 +2,7 @@ import axios from "axios";
 const products = {
   async get() {
     const { data } = await axios.post("/products/get");
+    console.log(data);
     return data;
   },
 
@@ -17,7 +18,7 @@ const products = {
     token: string,
     address: string,
     contact: string,
-    productId: string
+    productId: string,
   ) {
     const { data } = await axios.post("/orders/make", {
       address,

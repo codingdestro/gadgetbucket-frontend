@@ -3,7 +3,7 @@ import { ProductType } from "../types/productType";
 import api from "../api";
 export type CartType = {
   id: string;
-  product: ProductType;
+  products: ProductType;
   payment: number;
 };
 type State = {
@@ -32,10 +32,11 @@ const useCart = create<State & Action>((set) => ({
         return;
       }
       const data = await api.cart.get(token);
+      console.log(data.cart);
       set({
         isLoading: false,
         error: "",
-        cart: data?.carts,
+        cart: data?.cart,
         payment: data?.payment,
       });
     } catch (error) {
