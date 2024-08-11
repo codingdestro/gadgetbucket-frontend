@@ -9,23 +9,28 @@ interface Props {
 }
 const OrderCard = ({ id, date, price, address, status }: Props) => {
   return (
-    <section className="grid grid-cols-2 grid-rows-3 flex-col w-full border gap-y-3 justify-between items-stretch p-5 rounded-lg">
-      <div className="text-[12px] place-self-end col-span-2">{date}</div>
-      <div className="line-clamp-1 hover:underline  ">
-        <Link to={`./${id}`}>{id}</Link>
-      </div>
-      <div className="text-sm place-self-end">
-        <span>₹</span>
-        <span className="italic font-[600]">{price}</span>
+    <Link
+      to={`./${id}`}
+      className=" hover:bg-slate-100 text-sm transition-all max-w-[600px] w-full flex justify-between items-center p-5 border border-slate-100  rounded-lg"
+    >
+      <div className="flex-1 flex flex-col items-start gap-5">
+        <div className="text-sm">{date}</div>
+        <span className="">{address}</span>
       </div>
 
-      <span className="line-clamp-1">{address}</span>
-      <span
-        className={`${status} place-self-end text-center font-[500] px-5 py-1 rounded-lg capitalize `}
-      >
-        {status}
-      </span>
-    </section>
+      <div className="flex-1 flex flex-col items-end  gap-5">
+        <div className="">
+          <span>₹</span>
+          <span className="italic font-[600]">{price}</span>
+        </div>
+
+        <span
+          className={`${status} text-center font-[500] px-5 py-1 rounded-lg capitalize `}
+        >
+          {status}
+        </span>
+      </div>
+    </Link>
   );
 };
 

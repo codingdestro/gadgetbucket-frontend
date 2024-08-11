@@ -22,6 +22,14 @@ export default {
       },
 
       keyframes: {
+        spin: {
+          from: {
+            rotate: "0deg",
+          },
+          to: {
+            rotate: "360deg",
+          },
+        },
         fadeIn: {
           from: { opacity: 0 },
           to: { opacity: 1 },
