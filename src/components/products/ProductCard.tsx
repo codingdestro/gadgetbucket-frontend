@@ -32,7 +32,7 @@ const ProductCard = ({ product }: Props) => {
           >
             order now
           </button>
-          <div className="bg-orange-500  rounded-lg py-2 px-5">
+          <div className="bg-orange-500 flex items-center justify-center  rounded-lg py-2 px-5 w-32">
             {isAddedToCart !== product.id ? (
               <button
                 onClick={() => !isAddedToCart && addToCartProduct(product.id)}
@@ -40,7 +40,11 @@ const ProductCard = ({ product }: Props) => {
                 add to cart
               </button>
             ) : (
-              <div>loading...</div>
+              <img
+                src="/assets/loading.png"
+                alt="loading imge"
+                className="animate-spin w-4"
+              />
             )}
           </div>
         </div>

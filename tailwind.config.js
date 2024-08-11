@@ -19,6 +19,7 @@ export default {
       animation: {
         fade: "fadeIn .5s ease-in-out",
         fadeInOut: "fadeInOut 2s ease-in  forwards",
+        spin: "spin 2s linear infinite",
       },
 
       keyframes: {
