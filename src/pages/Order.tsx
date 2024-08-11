@@ -5,6 +5,7 @@ import Loading from "../components/status/Loading";
 import useFetchOrders from "../hooks/useFetchOrders";
 type OrderType = {
   id: string;
+  cartToken: string;
   payment: string;
   address: string;
   status: "pending" | "ordered" | "delivered" | "cancelled";
@@ -28,7 +29,7 @@ const Order = () => {
             orders.map((ele: OrderType, idx: number) => (
               <OrderCard
                 key={idx}
-                id={ele.id}
+                id={ele.cartToken}
                 price={ele.payment}
                 status={ele.status}
                 address={ele.address}

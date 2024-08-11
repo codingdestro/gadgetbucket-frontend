@@ -1,19 +1,17 @@
 import { useState } from "react";
 import api from "../api";
-const useFetchOrders = () => {
+const useFetchOrderItems = () => {
   const [isLoading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [orders, setOrders] = useState([]);
+  const [items, setItems] = useState([]);
 
-  const fetch = async () => {
+  const fetch = async (cartToken: string) => {
     setLoading(true);
-    const token = localStorage.getItem("token") || "";
-
     try {
-      const data = await api.orders.get(token);
+      const data = await api.orders.fetchOrderItems(cartToken);
       if (data?.orderList) {
         setSuccess(true);
-        setOrders(data?.orderList);
+        setItems(data?.orderList);
       } else {
         setSuccess(false);
       }
@@ -23,7 +21,7 @@ const useFetchOrders = () => {
       setSuccess(false);
     }
   };
-  return { isLoading, success, orders, fetch };
+  return { isLoading, success, items, fetch };
 };
 
-export default useFetchOrders;
+export default useFetchOrderItems;

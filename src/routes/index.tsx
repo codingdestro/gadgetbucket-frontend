@@ -14,6 +14,7 @@ import Login from "../pages/accounts/Login";
 import Cart from "../pages/Cart";
 import MakeOrder from "../pages/MakeOrder";
 import Order from "../pages/Order";
+import OrderItems from "../pages/OrderItems";
 
 const route = createBrowserRouter(
   createRoutesFromElements(
@@ -23,7 +24,8 @@ const route = createBrowserRouter(
           <Route path="" element={<Home />} />
           <Route path="make/order/:Id" element={<MakeOrder />} />
           <Route path="cart" element={<Cart />} />
-          <Route path="order" element={<Order/>} />
+          <Route path="order" element={<Order />} />
+          <Route path="order/:orderId" element={<OrderItems />} />
         </Route>
       </Route>
       <Route path="/account" loader={TokenLoader} element={<Account />}>
@@ -34,8 +36,8 @@ const route = createBrowserRouter(
         path="*"
         element={<Error message="sorry page not found!" />}
       ></Route>
-    </Route>
-  )
+    </Route>,
+  ),
 );
 
 export default route;
