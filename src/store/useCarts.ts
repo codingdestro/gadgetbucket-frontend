@@ -32,7 +32,6 @@ const useCart = create<State & Action>((set) => ({
         return;
       }
       const data = await api.cart.get(token);
-      console.log(data.cart);
       set({
         isLoading: false,
         error: "",

@@ -12,7 +12,6 @@ const useFetchOrders = () => {
     try {
       const data = await api.orders.get(token);
       if (data?.orderList) {
-        console.log(data);
         setSuccess(true);
         setOrders(data?.orderList);
       } else {

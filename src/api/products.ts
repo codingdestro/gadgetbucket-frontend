@@ -2,7 +2,6 @@ import axios from "axios";
 const products = {
   async get() {
     const { data } = await axios.post("/products/get");
-    console.log(data);
     return data;
   },
 

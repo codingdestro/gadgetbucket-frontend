@@ -24,7 +24,7 @@ const Cart = () => {
   ) : !cart || cart.length === 0 ? (
     <Error msg="cart is empty" />
   ) : (
-    <section className="flex   sm:flex-row flex-col gap-5  relative items-center sm:items-start  ">
+    <section className="flex lg:flex-row flex-col gap-5 relative items-center lg:items-start justify-center pb-5">
       <div
         className=" max-w-[600px] outlet ax-h-[620px] gap-y-5 flex flex-col border
       rounded-lg  shadow-md scroll-none overflow-auto"

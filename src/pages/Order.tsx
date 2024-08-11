@@ -5,6 +5,7 @@ import Loading from "../components/status/Loading";
 import useFetchOrders from "../hooks/useFetchOrders";
 type OrderType = {
   id: string;
+  cartToken: string;
   payment: string;
   address: string;
   status: "pending" | "ordered" | "delivered" | "cancelled";
@@ -17,31 +18,29 @@ const Order = () => {
     fetch();
   }, []);
   return (
-    <section className="flex text-sm justify-center items-start w-full relative">
-      <div className="max-w-[1200px] flex flex-col p-5 gap-5 h-[80%] overflow-auto scroll-none fixed border rounded-lg shadow-md  w-full">
-        {isLoading ? (
-          <>
-            <Loading />
-          </>
-        ) : success ? (
-          orders.length !== 0 ? (
-            orders.map((ele: OrderType, idx: number) => (
-              <OrderCard
-                key={idx}
-                id={ele.id}
-                price={ele.payment}
-                status={ele.status}
-                address={ele.address}
-                date={new Date(ele.createdAt).toLocaleDateString()}
-              />
-            ))
-          ) : (
-            <Error msg="no order yet" />
-          )
+    <section className="flex flex-col h-screen text-sm items-center w-full relative gap-5 animate-fade px-5">
+      {isLoading ? (
+        <>
+          <Loading />
+        </>
+      ) : success ? (
+        orders.length !== 0 ? (
+          orders.map((ele: OrderType, idx: number) => (
+            <OrderCard
+              key={idx}
+              id={ele.cartToken}
+              price={ele.payment}
+              status={ele.status}
+              address={ele.address}
+              date={new Date(ele.createdAt).toLocaleDateString()}
+            />
+          ))
         ) : (
-          <Error msg="failed to fetch orders" />
-        )}
-      </div>
+          <Error msg="no order yet" />
+        )
+      ) : (
+        <Error msg="failed to fetch orders" />
+      )}
     </section>
   );
 };

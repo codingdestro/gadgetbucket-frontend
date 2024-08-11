@@ -19,9 +19,18 @@ export default {
       animation: {
         fade: "fadeIn .5s ease-in-out",
         fadeInOut: "fadeInOut 2s ease-in  forwards",
+        spin: "spin 2s linear infinite",
       },
 
       keyframes: {
+        spin: {
+          from: {
+            rotate: "0deg",
+          },
+          to: {
+            rotate: "360deg",
+          },
+        },
         fadeIn: {
           from: { opacity: 0 },
           to: { opacity: 1 },
